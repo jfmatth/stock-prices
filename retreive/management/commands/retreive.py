@@ -26,12 +26,6 @@ def retreive():
         if created:
             obj.price = ticker[s.symbol]['regularMarketPrice']            
             obj.save()
+            logger.info(f"{s.symbol} - Captured price")
         else:
             logger.info(f"{s.symbol} - Skipped creating duplicate price")
-
-        # p = Price()
-        # p.symbol = s.symbol
-        # p.datetime = ticker[s.symbol]['regularMarketTime']
-        # p.price = ticker[s.symbol]['regularMarketPrice']
-
-        # p.save()

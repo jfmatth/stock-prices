@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 yahooquery = "*"
+dj-database-url = "*"
+psycopg = {extras = ["binary", "pool"], version = "*"}
 
 [dev-packages]
 

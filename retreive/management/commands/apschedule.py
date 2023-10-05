@@ -37,6 +37,18 @@ def retreive():
         else:
             logger.info(f"{s.symbol} - Skipped creating duplicate price")
 
+@util.close_old_connections
+def delete_old_job_executions(max_age=180_000):
+  """
+  This job deletes APScheduler job execution entries older than `max_age` from the database.
+  It helps to prevent the database from filling up with old historical records that are no
+  longer useful.
+  
+  :param max_age: The maximum length of time to retain historical job execution records.
+                  Defaults to 7 days.
+  """
+  DjangoJobExecution.objects.delete_old_job_executions(max_age)
+
 
 class Command(BaseCommand):
   help = "Runs APScheduler."
@@ -51,6 +63,17 @@ class Command(BaseCommand):
       id="retreive",
       replace_existing=True,
     )
+
+    scheduler.add_job(
+      delete_old_job_executions,
+      trigger=CronTrigger(
+        day_of_week="*", hour="00", minute="00"
+      ),
+      id="delete_old_job_executions",
+      max_instances=1,
+      replace_existing=True,
+    )
+
 
     try:
       logger.info("Starting scheduler...")

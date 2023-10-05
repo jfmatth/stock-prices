@@ -1,1 +1,1 @@
-./manage.py retreive
+./manage.py apschedule

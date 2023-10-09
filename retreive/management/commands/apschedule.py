@@ -59,7 +59,7 @@ class Command(BaseCommand):
 
     scheduler.add_job(
       retreive,
-      trigger=CronTrigger.from_crontab("* 13-19 * * 1-5"),
+      trigger=CronTrigger.from_crontab("* 13-19 * * 0-4"),
       id="retreive",
       replace_existing=True,
     )

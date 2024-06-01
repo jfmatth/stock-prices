@@ -9,6 +9,7 @@ yahooquery = "*"
 dj-database-url = "*"
 psycopg = {extras = ["binary", "pool"], version = "*"}
 django-apscheduler = "*"
+gunicorn = "*"
 
 [dev-packages]
 

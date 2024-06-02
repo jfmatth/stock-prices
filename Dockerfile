@@ -10,7 +10,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . code
 WORKDIR /code
 
-EXPOSE 8000
 
 # runs the production server
-CMD ["gunicorn", "stockprices.wsgi"]
+CMD ["gunicorn", "stockprices.wsgi","-b","0.0.0.0:8000"]

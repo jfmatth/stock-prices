@@ -4,11 +4,10 @@ kind: "postgresql"
 apiVersion: "acid.zalan.do/v1"
 
 metadata:
-  name: "pg-stocks"
+  name: "stockprices"
   labels:
     team: acid
   namespace: stocks
-
 
 spec:
   teamId: "acid"

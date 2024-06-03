@@ -1,5 +1,4 @@
 # Dockerfile
-
 FROM python:3.12-slim
 
 # Allows docker to cache installed dependencies between builds
@@ -10,6 +9,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . code
 WORKDIR /code
 
-
 # runs the production server
-CMD ["gunicorn", "stockprices.wsgi","-b","0.0.0.0:8000"]
+CMD ["gunicorn", "stockprices.wsgi"]

@@ -105,3 +105,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+postgresql:
+  dbname: stockprices
+  replicas: 1
+  size: "2Gi"
+  users:
+    django: []
+  databases:
+    stockprices: django
+

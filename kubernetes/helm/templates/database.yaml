@@ -1,0 +1,33 @@
+# https://opensource.zalando.com/postgres-operator/
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+metadata:
+  name: {{ .Values.postgresql.dbname }}
+  labels:
+    team: acid
+
+spec:
+  teamId: "acid"
+  postgresql:
+    version: "15"
+  numberOfInstances: {{ .Values.postgresql.replicas }}
+
+  # enableMasterLoadBalancer: true
+  volume:
+    size: {{ .Values.postgresql.size }}
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 250Mi
+    limits:
+      cpu: 2500m
+      memory: 3000Mi
+
+  users:
+    {{- toYaml .Values.postgresql.users | nindent 4 }}
+
+  databases:
+    {{- toYaml .Values.postgresql.databases | nindent 4 }}
+
+# https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config

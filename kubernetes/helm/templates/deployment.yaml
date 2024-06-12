@@ -50,6 +50,16 @@ spec:
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          env:
+          - name: GREETING
+            value: "Warm greetings to"
+          - name: HONORIFIC
+            value: "The Most Honorable"
+          - name: NAME
+            value: "Kubernetes"
+          - name: MESSAGE
+            value: "$(GREETING) $(HONORIFIC) $(NAME)"
+    
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

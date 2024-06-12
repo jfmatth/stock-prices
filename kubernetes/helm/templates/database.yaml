@@ -30,4 +30,5 @@ spec:
   databases:
     {{- toYaml .Values.postgresql.databases | nindent 4 }}
 
+
 # https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config

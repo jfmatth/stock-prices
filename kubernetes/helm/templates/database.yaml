@@ -2,7 +2,7 @@
 kind: "postgresql"
 apiVersion: "acid.zalan.do/v1"
 metadata:
-  name: {{ .Values.postgresql.dbname }}
+  name: {{ .Values.postgresql.database }}
   labels:
     team: acid
 
@@ -25,10 +25,10 @@ spec:
       memory: 3000Mi
 
   users:
-    {{- toYaml .Values.postgresql.users | nindent 4 }}
+    {{ .Values.postgresql.user }}: []
 
   databases:
-    {{- toYaml .Values.postgresql.databases | nindent 4 }}
+    {{ .Values.postgresql.database }}: {{ .Values.postgresql.user }}
 
 
 # https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#using-environment-variables-inside-of-your-config

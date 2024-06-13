@@ -107,14 +107,8 @@ tolerations: []
 affinity: {}
 
 postgresql:
-  dbname: stockprices
+  database: stockprices
   replicas: 1
   size: "2Gi"
-  
-  users:
-    django: []
-
-  databases:
-    stockprices: django
-
+  user: django
   secret: django.stockprices

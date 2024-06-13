@@ -52,31 +52,15 @@ spec:
           {{- end }}
 
           env:
-          - name: DATBASE_URL
-            value: "postgres://{{ .Values.postgresql.user }}${password}@{{ .Values.postgresql.database }}/{{ .Values.postgresql.database }}?sslmode=require"
-          envFrom:
-            secretKeyRef:
-              name: {{ .Values.postgresql.secret }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.postgresql.secret }}
+                key: password
 
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: my-app
-# spec:
-#   template:
-#     spec:
-#       containers:
-#       - name: my-app
-#         image: my-app-image
-#         env:
-#         - name: DATABASE_URL
-#           value: "postgres://$(DB_USER):$(DB_PASS)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
-#         envFrom:
-#         - secretRef:
-#             name: my-db-secret
-
-
-    
+          - name: DATABASE_URL
+            value: postgres://{{ .Values.postgresql.user }}:$(DB_PASSWORD)@{{ .Values.postgresql.database }}/{{ .Values.postgresql.database }}?sslmode=require
+   
       {{- with .Values.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}

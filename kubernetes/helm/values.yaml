@@ -112,3 +112,7 @@ postgresql:
   size: "2Gi"
   user: django
   secret: django.stockprices
+
+cron:
+  enabled: false
+  schedule: "* 13-19 * * 0-4"

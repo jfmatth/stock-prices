@@ -8,7 +8,7 @@ image:
   repository: jfmatth/stockprices
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.1
+  tag: 0.3
 
 imagePullSecrets: []
 nameOverride: ""
@@ -44,17 +44,21 @@ service:
   port: 8000
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations:
+    cert-manager.io/cluster-issuer: clusterissuer
+    traefik.ingress.kubernetes.io/router.middlewares: cert-manager-redirect@kubernetescrd
+
   hosts:
-    - host: chart-example.local
+    - host: stocks.3756home.org
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
+  tls: 
+    - secretName: https-stockprices
+      hosts:
+        - stocks.3756home.org
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
@@ -73,11 +77,11 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /admin
     port: 8000
 readinessProbe:
   httpGet:
-    path: /
+    path: /admin
     port: 8000
 
 autoscaling:
@@ -114,5 +118,5 @@ postgresql:
   secret: django.stockprices
 
 cron:
-  enabled: false
-  schedule: "* 13-19 * * 0-4"
+  enabled: true
+  crontab: '"* 13-19 * * 0-4"'

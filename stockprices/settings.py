@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u0gnpk%hcy-k5trp5#n$lk+o(@xl9)k=+s)!$q)@__-8wzjdp_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -152,3 +152,5 @@ LOGGING = {
 }
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+CSRF_TRUSTED_ORIGINS = ['https://*.3756home.org','https://*.127.0.0.1']
+

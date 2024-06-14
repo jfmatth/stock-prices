@@ -6,7 +6,7 @@ metadata:
   labels:
    {{- include "stock-prices.labels" . | nindent 4 }}
 spec:
-  schedule: {{ Values.cron.schedule }}
+  schedule: {{ .Values.cron.crontab }}
   jobTemplate:
     spec:
       template:

@@ -77,11 +77,11 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /admin
+    path: /health
     port: 8000
 readinessProbe:
   httpGet:
-    path: /admin
+    path: /health
     port: 8000
 
 autoscaling:
@@ -111,11 +111,11 @@ tolerations: []
 affinity: {}
 
 postgresql:
-  database: stockprices
+  database: prices
   replicas: 1
   size: "2Gi"
   user: django
-  secret: django.stockprices
+  secret: django.prices
 
 cron:
   enabled: true

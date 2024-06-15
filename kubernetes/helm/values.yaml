@@ -119,4 +119,5 @@ postgresql:
 
 cron:
   enabled: true
-  crontab: '"* 13-19 * * 0-4"'
+  # crontab: '"* 13-19 * * 0-4"'
+  crontab: '"* 6-13 * * 1-5"'
